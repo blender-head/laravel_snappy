@@ -1,0 +1,63 @@
+1. Configuration:
+
+	- application key:
+
+		location: 'application/config/application.php'
+		value: 'key' -> remove the default value first!
+		generate key: 'php artisan key:generate'
+
+	- remove 'index.php':
+
+		location: 'application/config/application.php'
+		value: 'index' -> remove the 'index.php' value!
+
+	- database config:
+
+		location: 'application/config/database.php'
+		value: 'connections'
+
+	- install application migration table:
+
+		php artisan migrate:install
+
+	- auth username column:
+
+		location: 'application/config/auth.php'
+		value: 'username' -> change it to 'username'
+
+2. Layout:
+
+	location: 'application/views/layouts/default.blade.php'
+	app css: 'public/css/main.css'
+
+3. Models:
+
+	- 'users' table:
+
+		- generate migration file: 'php artisan migrate:make create_users_table'
+		- create the table: 'php artisan migrate'
+		- location: 'application/models/user.php'
+		- 'users' has many 'questions'
+		- 'users' has many 'anwers'
+
+	- 'questions' table:
+
+		- generate migration file: 'php artisan migrate:make create_questions_table'
+ 		- create the table: 'php artisan migrate'
+ 		- location: 'application/models/questions.php'
+ 		- 'questions' belongs to 'users'
+ 		- 'questions' has many 'answers'
+
+	- 'answers' table:
+
+		- generate migration file: 'php artisan migrate:make create_answers_table'
+		- create the table: 'php artisan migrate'
+ 		- location: 'application/models/answers.php'
+ 		- 'answers' belongs to 'users'
+ 		- 'answers' belongs to 'questions'
+
+4. Controllers:
+
+	- application/controllers/questions.php
+	- application/controllers/users.php
+	- application/controllers/answers.php
